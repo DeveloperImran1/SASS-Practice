@@ -1,0 +1,137 @@
+// sobgulo partial file k import na kore sudho, index partial k import korlei hobe. karon all partial file index.scss file a import kora ase.
+
+@forward "./base//index";  // jei code gulo import kore use korte hoina.. automatic apply hosse, taderke base folder moddhe rakhbo.
+
+@use "./util/index";  // util theke nia asle use keyword use korte hobe. karon util folder theke ja kiso nia asbo ta use korbo. ai jonno jeigulo use korte hobe ,, taderke likhboi util folder a.
+
+// color variable declaretion
+
+// aikhane aigulo comment kore rakhlam. karon util>_variable.scss file a use koresi, and oi file k sudho import korlei kaj hobe. jar fole code organize thakbe.
+// $header-bgcolor: #ffab73;
+// $main-bgcolor: #ffd384;
+// $footer-bgcolor: #ffab70;
+
+$para-textsize: 3rem;
+
+// browser reset code
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background: index.$header-bgcolor;
+}
+
+nav{
+    margin-top: 20px;
+
+    ul{
+        list-style-type: none;
+
+        li{
+            display: inline-block;
+
+            a{
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                padding: 10px;
+                transition: 0.4s;
+                border-radius: 5px;
+            }
+            a:hover{
+                background-color: black;
+            }
+        }
+    }
+}
+
+
+main{
+    background: index.$main-bgcolor;
+}
+
+// ai file a variable create kore use korle , oi variable k aivabe use korbo.
+// footer{
+//     background: $footer-bgcolor;
+// }
+
+// ar util folder a variable likha ,, ai file a @use keyword dia import korlam. akhon use korar jonno index. use korte hobe.
+footer{
+    background: index.$footer-bgcolor;
+}
+
+#about{
+    font-size: $para-textsize;
+}
+
+
+
+// mixin and include concept
+
+// statick vabe value add koresi: 
+// @mixin para-style(){
+//     font-size: 20px;
+//     text-align: center;
+//     margin: 10px;
+// }
+
+// footer{
+//     @include para-style();
+// }
+
+// danamic vabe value add koresi: 
+@mixin para-style($size, $style){
+    font-size: $size;
+    text-align: $style;
+    margin: 10px;
+}
+
+footer{
+    @include para-style(30px, right);
+}
+
+
+
+// extend and inheritance concept
+.btn{
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-download{
+    // uporer btn class ta ke er moddhe apply korar jonno @extend keyword dia oi class er namta add korte hobe. aita hosse inheritance. akjoner property arekjoner kase nia gia use korte parbe.
+    @extend .btn;
+    border-radius: 8px;
+    background-color: tomato;
+    margin-top: 10px;
+}
+
+
+
+
+// conditionaly kono element k style korar jonno @if, @else if, @else use kora hoi,, jar jonno @mixin keyword ta use hoi.
+@mixin setFontSize($value){
+    @if $value == small{
+        font-size: 12px;
+    }
+    @else if $value == medium{
+        font-size: 16px;
+    }
+    @else if $value == large{
+        font-size: 20px;
+    }
+    @else{
+        font-size: none;
+    }
+}
+
+#mixinExample{
+    padding: 20px 0;
+    @include setFontSize(small)
+}
